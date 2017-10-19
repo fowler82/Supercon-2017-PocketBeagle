@@ -44,22 +44,22 @@ patch_kernel () {
 copy_defconfig () {
 	cd "${DIR}/KERNEL" || exit
 	make ARCH=${KERNEL_ARCH} CROSS_COMPILE="${CC}" distclean
-	if [ ! -f "${DIR}/.yakbuild" ] ; then
+#	if [ ! -f "${DIR}/.yakbuild" ] ; then
 		make ARCH=${KERNEL_ARCH} CROSS_COMPILE="${CC}" "${config}"
 		cp -v .config "${DIR}/patches/ref_${config}"
 		cp -v "${DIR}/patches/defconfig" .config
-	else
-		make ARCH=${KERNEL_ARCH} CROSS_COMPILE="${CC}" rcn-ee_defconfig
-	fi
+#	else
+#		make ARCH=${KERNEL_ARCH} CROSS_COMPILE="${CC}" rcn-ee_defconfig
+#	fi
 	cd "${DIR}/" || exit
 }
 
 make_menuconfig () {
 	cd "${DIR}/KERNEL" || exit
 	make ARCH=${KERNEL_ARCH} CROSS_COMPILE="${CC}" menuconfig
-	if [ ! -f "${DIR}/.yakbuild" ] ; then
+#	if [ ! -f "${DIR}/.yakbuild" ] ; then
 		cp -v .config "${DIR}/patches/defconfig"
-	fi
+#	fi
 	cd "${DIR}/" || exit
 }
 
