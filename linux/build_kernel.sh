@@ -248,8 +248,11 @@ fi
 if [ ! "${AUTO_BUILD}" ] ; then
 	make_menuconfig
 fi
-if [  -f "${DIR}/.yakbuild" ] ; then
-	BUILD=$(echo ${kernel_tag} | sed 's/[^-]*//'|| true)
+if [ -f "${DIR}/.yakbuild" ] ; then
+	BUILD=$(echo ${kernel_tag} | sed 's/[^-]*//' || true)
+	##FIXME: -rcX
+	BUILD=$(echo ${BUILD} | sed 's/^-//' || true)
+	BUILD=$(echo ${BUILD} | sed 's/[^-]*//' || true)
 fi
 make_kernel
 make_modules_pkg
